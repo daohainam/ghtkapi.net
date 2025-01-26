@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghtk.Api", "Ghtk.Api\Ghtk.Api.csproj", "{D3DF06EB-5290-4534-B135-AEA084B23E08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghtk.Authorization", "Ghtk.Authorization\Ghtk.Authorization.csproj", "{CA9C9EC5-7F8D-491F-9E77-3E3BDF818588}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientAuthentication", "ClientAuthentication\ClientAuthentication.csproj", "{756BAAEE-70CC-4158-BD5B-48CEC8F61B05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientAuthentication.Api", "ClientAuthentication.Api\ClientAuthentication.Api.csproj", "{F97E63F7-07C0-47D0-B048-A10693433908}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghtk.Repository.Abstractions", "Ghtk.Repository.Abstractions\Ghtk.Repository.Abstractions.csproj", "{7AFD0072-38EA-45EC-8E0F-5B341A1F366C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghtk.Repository.MongoDb", "Ghtk.Repository.MongoDb\Ghtk.Repository.MongoDb.csproj", "{67EF274B-92FD-4F68-AD4A-430CB141FDE9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3DF06EB-5290-4534-B135-AEA084B23E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3DF06EB-5290-4534-B135-AEA084B23E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3DF06EB-5290-4534-B135-AEA084B23E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3DF06EB-5290-4534-B135-AEA084B23E08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA9C9EC5-7F8D-491F-9E77-3E3BDF818588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA9C9EC5-7F8D-491F-9E77-3E3BDF818588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA9C9EC5-7F8D-491F-9E77-3E3BDF818588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA9C9EC5-7F8D-491F-9E77-3E3BDF818588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{756BAAEE-70CC-4158-BD5B-48CEC8F61B05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{756BAAEE-70CC-4158-BD5B-48CEC8F61B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{756BAAEE-70CC-4158-BD5B-48CEC8F61B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{756BAAEE-70CC-4158-BD5B-48CEC8F61B05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F97E63F7-07C0-47D0-B048-A10693433908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F97E63F7-07C0-47D0-B048-A10693433908}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F97E63F7-07C0-47D0-B048-A10693433908}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F97E63F7-07C0-47D0-B048-A10693433908}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AFD0072-38EA-45EC-8E0F-5B341A1F366C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AFD0072-38EA-45EC-8E0F-5B341A1F366C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AFD0072-38EA-45EC-8E0F-5B341A1F366C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AFD0072-38EA-45EC-8E0F-5B341A1F366C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67EF274B-92FD-4F68-AD4A-430CB141FDE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67EF274B-92FD-4F68-AD4A-430CB141FDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67EF274B-92FD-4F68-AD4A-430CB141FDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67EF274B-92FD-4F68-AD4A-430CB141FDE9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

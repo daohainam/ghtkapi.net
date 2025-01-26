@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Ghtk.Authorization": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50331;http://localhost:50332"
+    }
+  }
+}

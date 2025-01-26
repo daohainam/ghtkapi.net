@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClientAuthentication\ClientAuthentication.csproj" />
+    <ProjectReference Include="..\Ghtk.Authorization\Ghtk.Authorization.csproj" />
+    <ProjectReference Include="..\Ghtk.Repository.Abstractions\Ghtk.Repository.Abstractions.csproj" />
+    <ProjectReference Include="..\Ghtk.Repository.MongoDb\Ghtk.Repository.MongoDb.csproj" />
+  </ItemGroup>
+
+</Project>
