@@ -13,6 +13,21 @@ namespace ClientAuthentication
         private SqlConnection connection;
         private bool disposedValue;
 
+        /*
+        
+         CREATE TABLE ClientSources
+        (
+	        ClientId	NVARCHAR(60) NOT NULL,
+	        ValidFrom	DATETIME NOT NULL,
+	        ValidTo		DATETIME NOT NULL,
+	        IsEnable	BIT NOT NULL,
+
+	        CONSTRAINT  pk_ClientSources PRIMARY KEY (ClientId),
+	        -- INDEX		idx_ClientSources (ClientId, ValidFrom, ValidTo, IsEnable) -- we don't actually need this since primary key is included in the select query
+        )
+        
+         */
+
         public SqlServerClientSourceAuthenticationHandler(string connectionString)
         {
             _connectionString = connectionString;
