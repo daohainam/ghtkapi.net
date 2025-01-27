@@ -26,6 +26,7 @@ namespace Ghtp.Api.IntegrationTests
             {
                 Order = new SubmitOrderRequestOrder
                 {
+                    Id = Guid.NewGuid().ToString(),
                     PickName = "PickName",
                     PickAddress = "PickAddress",
                     PickProvince = "PickProvince",
@@ -68,6 +69,29 @@ namespace Ghtp.Api.IntegrationTests
 
             var response = await _client.PostAsJsonAsync("/services/shipment/order", submitOrderRequest);
             response.EnsureSuccessStatusCode();
+
+            var submitOrderResponse = await response.Content.ReadFromJsonAsync<SubmitOrderResponse>();
+            Assert.NotNull(submitOrderResponse);
+            Assert.NotNull(submitOrderResponse.Order.TrackingId);
+            Assert.Equal(submitOrderRequest.Products.Length, submitOrderResponse.Order.Products.Length);
+            foreach (var product in submitOrderRequest.Products)
+            {
+                Assert.Contains(submitOrderResponse.Order.Products, p => p.Name == product.Name && p.Quantity == product.Quantity && p.Weight == product.Weight && p.ProductCode == product.ProductCode);
+            }
+            
+            var getOrdersResponse = await _client.GetAsync($"/services/shipment/v2/{submitOrderResponse.Order.TrackingId}");
+            getOrdersResponse.EnsureSuccessStatusCode();
+
+            var getOrderStatusResponse = await getOrdersResponse.Content.ReadFromJsonAsync<GetOrderStatusResponse>();
+            Assert.NotNull(getOrderStatusResponse);
+
+            var cancelOrderResponse = await _client.PostAsync($"/services/shipment/cancel/{submitOrderResponse.Order.TrackingId}", new StringContent(string.Empty));
+            cancelOrderResponse.EnsureSuccessStatusCode();
+
+            var apiResult = await cancelOrderResponse.Content.ReadFromJsonAsync<ApiResult>();
+            Assert.NotNull(apiResult);
+            Assert.True(apiResult.Success);
+
         }
     }
 }
