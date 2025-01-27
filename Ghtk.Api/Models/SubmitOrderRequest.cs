@@ -10,10 +10,10 @@ using System.Globalization;
 public partial class SubmitOrderRequest
 {
     [JsonPropertyName("products")]
-    public OrderProduct[] Products { get; set; }
+    public OrderProduct[] Products { get; set; } = default!;
 
     [JsonPropertyName("order")]
-    public SubmitOrderRequestOrder Order { get; set; }
+    public SubmitOrderRequestOrder Order { get; set; } = default!;
 }
 
 public class SubmitOrderRequestOrder
@@ -88,7 +88,7 @@ public class SubmitOrderRequestOrder
 public class OrderProduct
 {
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [JsonPropertyName("weight")]
     public double Weight { get; set; }

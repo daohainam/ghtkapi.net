@@ -2,14 +2,10 @@
 
 namespace Ghtk.Api.AuthenticationHandler
 {
-    public class RemoteClientSourceAuthenticationHandler : IClientSourceAuthenticationHandler
+    public class RemoteClientSourceAuthenticationHandler(string authenticationServiceUrl) : IClientSourceAuthenticationHandler
     {
         private static readonly HttpClient httpClient = new();
-        private readonly string authenticationServiceUrl;
-        public RemoteClientSourceAuthenticationHandler(string authenticationServiceUrl)
-        {
-            this.authenticationServiceUrl = authenticationServiceUrl;
-        }
+        private readonly string authenticationServiceUrl = authenticationServiceUrl;
 
         public bool Validate(string clientSource)
         {

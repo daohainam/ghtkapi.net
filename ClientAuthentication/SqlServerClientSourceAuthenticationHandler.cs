@@ -10,7 +10,7 @@ namespace ClientAuthentication
     public class SqlServerClientSourceAuthenticationHandler : IClientSourceAuthenticationHandler, IDisposable
     {
         private readonly string _connectionString;
-        private SqlConnection connection;
+        private readonly SqlConnection connection;
         private bool disposedValue;
 
         /*
