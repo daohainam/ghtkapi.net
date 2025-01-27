@@ -15,7 +15,18 @@ namespace Ghtp.Api.IntegrationTests
     public class SUTWebApplicationFactory : WebApplicationFactory<Program> 
     {
         public const string ClientSource = "TEST-CLIENT";
-        public const string Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJURVNULUNMSUVOVCIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoyNTE2MjM5MDIyfQ.x9wYJifrwGsH9yd9FhYmz2IwDx8cOJHv4JvacyNW2Eo";
+        public const string TokenSecret = "qx8tVBNAJHCgrjvCktD8oGluT3EFAGuiqx8tVBNAJHCgrjvCktD8oGluT3EFAGui";
+        public const string Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJURVNULUNMSUVOVCIsIm5hbWUiOiJBcGkgUGFydG5lciIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoyNTE2MjM5MDIyLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOlsiUGFydG5lciJdfQ.c51_1AXEmMq6GQe98G_B19jDqFijPQeI9mq-G3IELRc";
+
+        /*
+{
+  "sub": "TEST-CLIENT",
+  "name": "Api Partner",
+  "iat": 1516239022,
+  "exp": 2516239022, 
+  "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": ["Partner"]
+}
+         */
 
         private readonly MsSqlContainer _msSqlContainer = new MsSqlBuilder().Build();
         private readonly MongoDbContainer _mongoDbContainer = new MongoDbBuilder().WithImage("mongo:8.0").WithExposedPort(47018).Build();
@@ -32,7 +43,7 @@ namespace Ghtp.Api.IntegrationTests
             builder.UseSetting("ConnectionStrings:SqlServerAuthenticationService", _msSqlContainer.GetConnectionString());
             builder.UseSetting("ConnectionStrings:MongoDbConnection", _mongoDbContainer.GetConnectionString());
 
-            builder.UseSetting("IssuerSigningKey", "qx8tVBNAJHCgrjvCktD8oGluT3EFAGuiqx8tVBNAJHCgrjvCktD8oGluT3EFAGui");
+            builder.UseSetting("IssuerSigningKey", TokenSecret);
 
             CreateTestClientSource(_msSqlContainer.GetConnectionString());
         }
