@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -11,46 +12,49 @@ namespace Ghtk.Authorization
 {
     public class XClientSourceAuthenticationHandler(IOptionsMonitor<XClientSourceAuthenticationHandlerOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : AuthenticationHandler<XClientSourceAuthenticationHandlerOptions>(options, logger, encoder, clock)
     {
-        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
+        protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             var clientSource = Context.Request.Headers["X-Client-Source"];
-            var token = Context.Request.Headers["Token"];
+            var tokenHeader = Context.Request.Headers["Token"];
 
             if (clientSource.Count == 0)
             {
-                return Task.FromResult(AuthenticateResult.Fail("Missing X-Client-Source header"));
+                return AuthenticateResult.Fail("Missing X-Client-Source header");
             }
 
-            if (token.Count == 0)
+            if (tokenHeader.Count == 0)
             {
-                return Task.FromResult(AuthenticateResult.Fail("Missing Token header"));
+                return AuthenticateResult.Fail("Missing Token header");
             }
 
 
             var clientSourceValue = clientSource.FirstOrDefault();
-            var tokenValue = token.FirstOrDefault();
+            var tokenValue = tokenHeader.FirstOrDefault();
 
             if (!string.IsNullOrEmpty(clientSourceValue) &&
                 !string.IsNullOrEmpty(tokenValue) &&
-                VerifyClient(clientSourceValue, tokenValue, out var principal))
+                VerifyClient(clientSourceValue, tokenValue, out var token, out var principal))
             {
-                //var identity = new ClaimsIdentity(Scheme.Name);
-                //identity.AddClaim(new Claim(ClaimTypes.Name, clientSourceValue));
-                //var principal = new ClaimsPrincipal(identity);
+
+                if (!await Options.ClientValidator(clientSourceValue, token!, principal!))
+                {
+                    return AuthenticateResult.Fail("Invalid Client Source");
+                }
+
                 ((ClaimsIdentity)principal!.Identity!).AddClaim(new Claim("PartnerId", clientSourceValue));
                 var ticket = new AuthenticationTicket(principal, Scheme.Name);
 
-                return Task.FromResult(AuthenticateResult.Success(ticket));
+                return AuthenticateResult.Success(ticket);
             }
             else
             {
-                return Task.FromResult(AuthenticateResult.Fail("Invalid Token"));
+                return AuthenticateResult.Fail("Invalid Token");
             }
         }
 
-        private bool VerifyClient(string clientSourceValue, string tokenValue, out ClaimsPrincipal? principal)
+        private bool VerifyClient(string clientSourceValue, string tokenValue, out SecurityToken? token, out ClaimsPrincipal? principal)
         {
-            if (!Validate(tokenValue, out var token, out principal))
+            if (!Validate(tokenValue, out token, out principal))
             {
                 return false;
             }
@@ -62,16 +66,14 @@ namespace Ghtk.Authorization
                 return false;
             }
 
-            if (!Options.ClientValidator(clientSourceValue, token!, principal!))
-            {
-                return false;
-            }
-
             return true;
         }
 
         private bool Validate(string tokenValue, out SecurityToken? token, out ClaimsPrincipal? claimsPrincipal)
         {
+            IdentityModelEventSource.ShowPII = true;
+            IdentityModelEventSource.LogCompleteSecurityArtifact = true;
+
             var handler = new JwtSecurityTokenHandler();
             var tokenValidationParameters = new TokenValidationParameters
             {

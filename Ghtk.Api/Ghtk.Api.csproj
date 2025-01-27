@@ -16,5 +16,7 @@
     <ProjectReference Include="..\Ghtk.Repository.Abstractions\Ghtk.Repository.Abstractions.csproj" />
     <ProjectReference Include="..\Ghtk.Repository.MongoDb\Ghtk.Repository.MongoDb.csproj" />
   </ItemGroup>
-
+	<ItemGroup>
+		<InternalsVisibleTo Include="Ghtp.Api.IntegrationTests" />
+	</ItemGroup>
 </Project>

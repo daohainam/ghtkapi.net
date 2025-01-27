@@ -18,12 +18,12 @@ namespace ClientAuthentication.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public async Task<IActionResult> Get(string id)
         {
             _logger.LogInformation("Authenticating client id: {id}", id);
 
 
-            if (_handler.Validate(id))
+            if (await _handler.ValidateAsync(id))
             {
                 _logger.LogInformation("Client id {id} is valid", id);
                 return Ok();

@@ -2,6 +2,6 @@
 {
     public interface IClientSourceAuthenticationHandler
     {
-        bool Validate(string clientSource);
+        Task<bool> ValidateAsync(string clientSource);
     }
 }

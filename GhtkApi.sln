@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghtk.Repository.Abstraction
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghtk.Repository.MongoDb", "Ghtk.Repository.MongoDb\Ghtk.Repository.MongoDb.csproj", "{67EF274B-92FD-4F68-AD4A-430CB141FDE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghtp.Api.IntegrationTests", "Ghtp.Api.IntegrationTests\Ghtp.Api.IntegrationTests.csproj", "{6892ABF6-E704-427E-8723-82D0B83FD971}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{67EF274B-92FD-4F68-AD4A-430CB141FDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67EF274B-92FD-4F68-AD4A-430CB141FDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67EF274B-92FD-4F68-AD4A-430CB141FDE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6892ABF6-E704-427E-8723-82D0B83FD971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6892ABF6-E704-427E-8723-82D0B83FD971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6892ABF6-E704-427E-8723-82D0B83FD971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6892ABF6-E704-427E-8723-82D0B83FD971}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

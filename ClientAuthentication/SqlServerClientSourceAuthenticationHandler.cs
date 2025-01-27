@@ -35,7 +35,7 @@ namespace ClientAuthentication
             connection = new SqlConnection(_connectionString);
         }
 
-        public bool Validate(string clientSource)
+        public async Task<bool> ValidateAsync(string clientSource)
         {
             if (connection.State == System.Data.ConnectionState.Closed)
             {
@@ -45,8 +45,8 @@ namespace ClientAuthentication
             var query = "SELECT TOP 1 1 FROM ClientSources WHERE ClientId = @ClientSource AND GETDATE() >= ValidFrom AND GETDATE() <= ValidTo AND IsEnable = 1";
             using var command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@ClientSource", clientSource);
-            using var reader = command.ExecuteReader();
-            if (reader.Read())
+            using var reader = await command.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
             {
                 return true;
             }
