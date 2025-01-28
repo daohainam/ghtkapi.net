@@ -1,4 +1,5 @@
-﻿using Ghtk.Api.Models;
+﻿using AutoMapper;
+using Ghtk.Api.Models;
 using Ghtk.Repository;
 using Ghtk.Repository.Abstractions.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -8,9 +9,10 @@ namespace Ghtk.Api.Controllers
 {
     [ApiController]
     [Route("/services/shipment")]
-    public class ShipmentServiceController(IOrderRepository orderRepository, ILogger<ShipmentServiceController> logger) : ControllerBase
+    public class ShipmentServiceController(IOrderRepository orderRepository, IMapper mapper, ILogger<ShipmentServiceController> logger) : ControllerBase
     {
         private readonly IOrderRepository _orderRepository = orderRepository;
+        private readonly IMapper _mapper = mapper;
         private readonly ILogger<ShipmentServiceController> _logger = logger;
 
         [HttpPost]
@@ -26,42 +28,8 @@ namespace Ghtk.Api.Controllers
                 return Unauthorized();
             }
 
-            var orderEntity = new Order
-            {
-                Id = Guid.NewGuid().ToString(),
-                PartnerId = partnerId,
-                PickName = order.Order.PickName,
-                PickAddress = order.Order.PickAddress,
-                PickProvince = order.Order.PickProvince,
-                PickDistrict = order.Order.PickDistrict,
-                PickWard = order.Order.PickWard,
-                PickTel = order.Order.PickTel,
-                Tel = order.Order.Tel,
-                Name = order.Order.Name,
-                Address = order.Order.Address,
-                Province = order.Order.Province,
-                District = order.Order.District,
-                Ward = order.Order.Ward,
-                Hamlet = order.Order.Hamlet,
-                IsFreeship = 1,
-                PickDate = DateTimeOffset.Now,
-                PickMoney = 1,
-                Note = "note",
-                Value = 1,
-                Transport = "transport",
-                PickOption = "pick_option",
-                DeliverOption = "deliver_option",
-                TrackingId = Guid.NewGuid().ToString(),
-                Status = 1,
-
-                Products = order.Products.Select(p => new Product
-                {
-                    Name = p.Name,
-                    Quantity = p.Quantity,
-                    Weight = p.Weight,
-                    ProductCode = p.ProductCode,
-                }).ToList()
-            };
+            var orderEntity = _mapper.Map<Order>(order);
+            orderEntity.PartnerId = partnerId;
 
             await _orderRepository.CreateOrderAsync(orderEntity);
 

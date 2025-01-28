@@ -1,4 +1,5 @@
 using ClientAuthentication;
+using Ghtk.Api.AutoMapperProfiles;
 using Ghtk.Authorization;
 using Ghtk.Repository;
 
@@ -23,6 +24,7 @@ namespace Ghtk.Api
                 }
                 );
 
+            builder.Services.AddAutoMapper(typeof(OrderProfile));
             builder.Services.AddMongoDbClient(builder.Configuration);
             builder.Services.AddScoped<IOrderRepository, MongoDbOrderRepository>();
 

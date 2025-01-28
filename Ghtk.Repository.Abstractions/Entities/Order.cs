@@ -25,7 +25,7 @@ public class Order
     public string Ward { get; set; } = default!;
     public string Hamlet { get; set; } = default!;
     public int IsFreeship { get; set; }
-    public DateTimeOffset PickDate { get; set; }
+    public DateTime PickDate { get; set; }
     public long PickMoney { get; set; }
     public string Note { get; set; } = default!;
     public long Value { get; set; }
