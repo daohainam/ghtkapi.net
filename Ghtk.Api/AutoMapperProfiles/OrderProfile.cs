@@ -7,42 +7,6 @@ public class OrderProfile: Profile
 {
     public OrderProfile()
     {
-        //var orderEntity = new Order
-        //{
-        //    Id = Guid.NewGuid().ToString(),
-        //    PartnerId = partnerId,
-        //    PickName = order.Order.PickName,
-        //    PickAddress = order.Order.PickAddress,
-        //    PickProvince = order.Order.PickProvince,
-        //    PickDistrict = order.Order.PickDistrict,
-        //    PickWard = order.Order.PickWard,
-        //    PickTel = order.Order.PickTel,
-        //    Tel = order.Order.Tel,
-        //    Name = order.Order.Name,
-        //    Address = order.Order.Address,
-        //    Province = order.Order.Province,
-        //    District = order.Order.District,
-        //    Ward = order.Order.Ward,
-        //    Hamlet = order.Order.Hamlet,
-        //    IsFreeship = 1,
-        //    PickDate = DateTimeOffset.Now,
-        //    PickMoney = 1,
-        //    Note = "note",
-        //    Value = 1,
-        //    Transport = "transport",
-        //    PickOption = "pick_option",
-        //    DeliverOption = "deliver_option",
-        //    TrackingId = Guid.NewGuid().ToString(),
-        //    Status = 1,
-
-        //    Products = order.Products.Select(p => new Product
-        //    {
-        //        Name = p.Name,
-        //        Quantity = p.Quantity,
-        //        Weight = p.Weight,
-        //        ProductCode = p.ProductCode,
-        //    }).ToList()
-        //};
         CreateMap<OrderProduct, Product>();
 
         CreateMap<SubmitOrderRequest, Order>()
