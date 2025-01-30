@@ -1,0 +1,48 @@
+services:
+  redis:
+    image: redis:latest
+    restart: always
+    volumes: 
+      - redis-data:/data
+    environment:
+      ALLOW_EMPTY_PASSWORD: yes
+      TZ: Asia/Ho_Chi_Minh
+  mongo:
+    image: mongo:latest
+    restart: always
+    volumes: 
+      - mongo-data:/data
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      ALLOW_EMPTY_PASSWORD: yes
+      TZ: Asia/Ho_Chi_Minh
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+      ME_CONFIG_BASICAUTH: false
+  ghtk-api:
+    build: 
+      context: ..
+      dockerfile: Ghtk.Api/Dockerfile    
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      IssuerSigningKey: olcjcHn1cJGjewCTy1rRDFOak88VZzbi
+      AuthenticationService: MongoDb
+      ConnectionStrings__MongoDbConnection: mongodb://mongo:27017/
+      ConnectionStrings__MongoDbAuthenticationService: mongodb://mongo:27017/
+      TZ: Asia/Ho_Chi_Minh
+    depends_on:
+      - redis
+      - mongo
+volumes:
+  redis-data:
+  mongo-data:
+ 

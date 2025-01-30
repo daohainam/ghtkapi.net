@@ -22,6 +22,11 @@ namespace ClientAuthentication
             {
                 return new RemoteClientSourceAuthenticationHandler(configuration.GetConnectionString("RemoteAuthenticationService") ?? throw new("Missing RemoteAuthenticationService connection string"));
             }
+            else if (t == "MongoDb")
+            {
+                return new MongoDbClientSourceAuthenticationHandler(configuration.GetConnectionString("MongoDbAuthenticationService") ?? throw new("Missing MongoDbAuthenticationService connection string"));
+            }
+            else
 
             throw new Exception("Invalid authentication service type");
         }
